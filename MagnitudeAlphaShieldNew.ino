@@ -1,6 +1,7 @@
 //Code by Brent Luker
 #include "Accelerometer.h"
 #include "Magnetometer.h"
+#include "Barometer.h"
 #include "TempHumid.h"
 
 //Time in millis between each reading of the sensors, and
@@ -15,12 +16,13 @@
 Accelerometer a;
 Magnetometer m;
 TempHumid th;
+Barometer b;
 
 // Change this every time a sensor is added or removed from the code.
-#define NUM_SENSORS 3
+#define NUM_SENSORS 4
 
 //This array is used when all the sensors are more or less doing the same thing.
-Sensor* sensors[NUM_SENSORS] = {&a, &m, &th};
+Sensor* sensors[NUM_SENSORS] = {&a, &b, &m, &th};
 void setup() {
   Serial.begin(9600);
   
@@ -47,9 +49,15 @@ void loop() {
   if( lastLog < millis()){
     Serial.print( F("Temp: "));
     Serial.print( th.temp );
-    Serial.print( F("C,humidity: "));
+    Serial.print( F(",humidity: "));
     Serial.print( th.humidity );
-    Serial.print( F("%,accel_x: " ) );
+	Serial.print( F(",Temp: "));
+    Serial.print( b.temperature );
+	Serial.print( F(",pressure: "));
+    Serial.print( b.pressure );
+    Serial.print( F(",Altitude"));
+    Serial.print( b.altitude);
+    Serial.print( F(",accel_x: " ) );
     Serial.print( a.x );
     Serial.print( F(",accel_y: " ) );
     Serial.print( a.y );
