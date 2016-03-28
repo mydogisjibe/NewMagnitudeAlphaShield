@@ -47,13 +47,13 @@ void loop() {
 
   // Data logging
   if( lastLog < millis()){
-    Serial.print( F("Temp: "));
+    Serial.print( F("th02Temp: "));
     Serial.print( th.temp );
     Serial.print( F(",humidity: "));
     Serial.print( th.humidity );
-	Serial.print( F(",Temp: "));
+	  Serial.print( F(",bmp180Temp: "));
     Serial.print( b.temperature );
-	Serial.print( F(",pressure: "));
+	  Serial.print( F(",pressure: "));
     Serial.print( b.pressure );
     Serial.print( F(",Altitude"));
     Serial.print( b.altitude);
