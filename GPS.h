@@ -10,34 +10,49 @@
 
 class GPS: public Sensor
 {
-public:
+public: //used by MagnitudeAlphaShieldNew.ino
   GPS();
-  float lat=0;
-  float lon=0;
-  float alt=0;
-  float speed_mps=0;
-  unsigned long age = 0;
+  float lat;//latitude
+  float lon;//longitdue
+  float alt;//altitude
+  unsigned long date;
+  unsigned long time;
+  float speed_mps;
+  unsigned long age;//fix age
+  //functions
   void initSensor();
-  void initializeGPS();
   void updateData();
-
+  
+private:
+  //invalid valuds
+  enum {
+    GPS_INVALID_AGE = 0xFFFFFFFF,      GPS_INVALID_ANGLE = 999999999, 
+    GPS_INVALID_ALTITUDE = 999999999,  GPS_INVALID_DATE = 0,
+    GPS_INVALID_TIME = 0xFFFFFFFF,     GPS_INVALID_SPEED = 999999999, 
+    GPS_INVALID_FIX_TIME = 0xFFFFFFFF,
+    GPS_INVALID_HDOP = 0xFFFFFFFF
+  };
   static const float GPS_INVALID_F_ANGLE, GPS_INVALID_F_ALTITUDE, GPS_INVALID_F_SPEED;
-   
+  
+  void initializeGPS();//initialize airborne mode
   bool encode(char c); // process one character received from GPS
   
-  GPS &operator << (char c) {encode(c); return *this;}
+  //get values from GPS
   void get_datetime(unsigned long *date, unsigned long *time, unsigned long *age);
   void get_position(long *latitude, long *longitude,unsigned long *age);
   inline long altitude() { return _altitude; };
   inline unsigned long speed() { return _speed; };
+  
   // horizontal dilution of precision in 100ths
   inline unsigned long hdop() { return _hdop; };
+
+  //get float values
   void f_get_position(float *latitude, float *longitude, unsigned long *fix_age = 0);
   float f_altitude();
-  float f_course();
   float f_speed_knots();
   float f_speed_mps();
-   enum {_GPS_SENTENCE_GPGGA, _GPS_SENTENCE_GPRMC, _GPS_SENTENCE_OTHER};
+  
+  enum {_GPS_SENTENCE_GPGGA, _GPS_SENTENCE_GPRMC, _GPS_SENTENCE_OTHER};
 
   // properties
   unsigned long _time, _new_time;
@@ -46,7 +61,6 @@ public:
   long _longitude, _new_longitude;
   long _altitude, _new_altitude;
   unsigned long  _speed, _new_speed;
-  unsigned long  _course, _new_course;
   unsigned long  _hdop, _new_hdop;
   unsigned short _numsats, _new_numsats;
 
@@ -74,16 +88,6 @@ public:
   int gpsstrcmp(const char *str1, const char *str2);
   unsigned long parse_decimal();
   unsigned long parse_degrees();
-  
-private:
-  enum {
-    GPS_INVALID_AGE = 0xFFFFFFFF,      GPS_INVALID_ANGLE = 999999999, 
-    GPS_INVALID_ALTITUDE = 999999999,  GPS_INVALID_DATE = 0,
-    GPS_INVALID_TIME = 0xFFFFFFFF,     GPS_INVALID_SPEED = 999999999, 
-    GPS_INVALID_FIX_TIME = 0xFFFFFFFF, GPS_INVALID_SATELLITES = 0xFF,
-    GPS_INVALID_HDOP = 0xFFFFFFFF
-  };
-  
   
 };
 

@@ -78,6 +78,10 @@ void loop() {
     Serial.print( g.alt);
     Serial.print( F(",gps_speed(mps): " ) );
     Serial.print( g.speed_mps);
+    Serial.print( F(",Date: " ) );
+    Serial.print( g.date);
+    Serial.print( F(",Time: " ) );
+    Serial.print( g.time);
     Serial.println();
     
   }
