@@ -1,14 +1,14 @@
 # Magnitude Alpha Shield Flight Repository
 
 ### This repository and code is created by:
-* #### [Jiahao Kuang](https://github.com/jiahaok)
-* #### [Brent Luker](https://github.com/mydogisjibe)
-* #### [Naomi Sagan](https://github.com/NSagan271)
+* [Jiahao Kuang](https://github.com/jiahaok)
+* [Brent Luker](https://github.com/mydogisjibe)
+* [Naomi Sagan](https://github.com/NSagan271)
 
 ### this respository is currently maintained by:
-* #### [Jiahao Kuang](https://github.com/jiahaok)
-* #### [Brent Luker](https://github.com/mydogisjibe)
-* #### [Naomi Sagan](https://github.com/NSagan271)
+* [Jiahao Kuang](https://github.com/jiahaok)
+* [Brent Luker](https://github.com/mydogisjibe)
+* [Naomi Sagan](https://github.com/NSagan271)
 
 ### What is this repository for:
 
