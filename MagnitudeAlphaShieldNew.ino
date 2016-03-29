@@ -2,6 +2,14 @@
 #include "Accelerometer.h"
 #include "Magnetometer.h"
 #include "GPS.h"
+#include "Barometer.h"
+#include "TempHumid.h"
+
+
+//Time in millis between each reading of the sensors, and
+//how long to wait after bootup.
+#define READ_DELAY 100
+#define INITIAL_DELAY 1000
 
 // LED pins on magnitude board
 #define LED_A_PIN 10
@@ -10,11 +18,12 @@
 Accelerometer a;
 Magnetometer m;
 GPS g;
+TempHumid th;
+Barometer b;
 
-#define NUM_SENSORS 3
+#define NUM_SENSORS 5
 
 //This array is used when all the sensors are more or less doing the same thing.
-Sensor* sensors[NUM_SENSORS] = {&a, &m,&g};
 void setup() {
   Serial.begin(9600);
   
@@ -23,20 +32,31 @@ void setup() {
   digitalWrite(LED_A_PIN, false);
   digitalWrite(LED_B_PIN, false);
   
-  for(byte i=0; i<NUM_SENSORS; i++)
+  for(int8_t i=0; i<NUM_SENSORS; i++)
     sensors[i]->initSensor();
 }
 
 //Creates 1 sec delay at begining
-int lastLog = 1000;
+unsigned long lastLog = INITIAL_DELAY;
 void loop() {
-  delay(100);
+  while(lastLog + READ_DELAY > millis());
+  lastLog = millis();
   
-  for(byte i=0; i<NUM_SENSORS; i++)
+  for(int8_t i=0; i<NUM_SENSORS; i++)
     sensors[i]->updateData();
 
   // Data logging
   if( lastLog < millis()){
+    Serial.print( F("th02Temp: "));
+    Serial.print( th.temp );
+    Serial.print( F(",humidity: "));
+    Serial.print( th.humidity );
+    Serial.print( F(",bmp180Temp: "));
+    Serial.print( b.temperature );
+    Serial.print( F(",pressure: "));
+    Serial.print( b.pressure );
+    Serial.print( F(",Altitude"));
+    Serial.print( b.altitude);
     Serial.print( F("accel_x: " ) );
     Serial.print( a.x );
     Serial.print( F(",accel_y: " ) );
@@ -50,9 +70,9 @@ void loop() {
     Serial.print( F(",mag_z: " ) );
     Serial.print( m.z);
     Serial.print( F(",gps_lat: " ) );
-    Serial.print( g.lat);
+    Serial.print( g.lat,6);
     Serial.print( F(",gps_lon: " ) );
-    Serial.print( g.lon);
+    Serial.print( g.lon,6);
     Serial.print( F(",gps_alt: " ) );
     Serial.print( g.alt);
     Serial.print( F(",gps_speed(mps): " ) );
