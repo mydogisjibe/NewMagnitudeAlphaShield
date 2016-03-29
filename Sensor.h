@@ -1,4 +1,3 @@
-// Code by Brent Luker
 #ifndef Sensor_h
 #define Sensor_h
 

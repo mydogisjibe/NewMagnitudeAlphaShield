@@ -1,5 +1,4 @@
-// Code by Brent Luker
-#include <ADXL345.h>
+#include "ADXL345.h"
 #include "Sensor.h"
 
 #ifndef Accelerometer_h
