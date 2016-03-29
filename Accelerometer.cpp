@@ -14,9 +14,9 @@ void Accelerometer::initSensor(){
 }
 
 void Accelerometer::updateData(){
-	int ax, ay, az;
+  int ax, ay, az;
 	accelerometer.readAccel(&ax, &ay, &az);
-	x = ((int16_t) ax) * ADXL345_G_PER_LSB;
-	y = ((int16_t) ay) * ADXL345_G_PER_LSB;
-	z = ((int16_t) az) * ADXL345_G_PER_LSB;
+  x = ((float) ax) * ADXL345_G_PER_LSB;
+  y = ((float) ay) * ADXL345_G_PER_LSB;
+  z = ((float) az) * ADXL345_G_PER_LSB;
 }
