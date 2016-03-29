@@ -60,24 +60,24 @@ void GPS::updateData(){//get GPS data
 
   //Invalid data
   if (age == GPS_INVALID_AGE) {//no/old GPS fix
-    Serial.println("No GPS Fix");
+    Serial.print(F("**No GPS Fix**"));
   } else if (age > 10000) {
-    Serial.println(F("GPS Fix is older than 10 sec. Possible stale data"));
+    Serial.print(F("**GPS Fix is older than 10 sec. Possible stale data**"));
   }
   if (lat == GPS_INVALID_F_ANGLE) {
-    Serial.println(F("GPS: Invalid Lat"));
+    Serial.print(F("**GPS: Invalid Lat**"));
     lat = 0.0;//default value
   }
   if (lon == GPS_INVALID_F_ANGLE) {
-    Serial.println(F("GPS: Invalid Long"));
+    Serial.print(F("**GPS: Invalid Lon**"));
     lon = 0.0;//default value
   }  
   if (alt == GPS::GPS_INVALID_F_ALTITUDE) {
-    Serial.println(F("GPS: Invalid Alt"));
+    Serial.print(F("**GPS: Invalid Alt**"));
     alt = 0.0;//default value
   }  
   if (speed_mps == GPS::GPS_INVALID_F_SPEED) {
-    Serial.println(F("GPS: Invalid Speed"));
+    Serial.print(F("**GPS: Invalid Speed**"));
     speed_mps = 0.0;//default value
   }  
 }

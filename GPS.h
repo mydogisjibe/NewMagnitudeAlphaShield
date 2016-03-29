@@ -90,6 +90,4 @@ private:
   unsigned long parse_degrees();
   
 };
-
-
 #endif
