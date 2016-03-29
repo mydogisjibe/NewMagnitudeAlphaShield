@@ -15,26 +15,35 @@ const float GPS::GPS_INVALID_F_ANGLE = 1000.0;
 const float GPS::GPS_INVALID_F_ALTITUDE = 1000000.0;
 const float GPS::GPS_INVALID_F_SPEED = -1.0;
 
-   
+  GPS::GPS()
+  :  _time(GPS_INVALID_TIME)
+  ,  _date(GPS_INVALID_DATE)
+  ,  _latitude(GPS_INVALID_ANGLE)
+  ,  _longitude(GPS_INVALID_ANGLE)
+  ,  _altitude(GPS_INVALID_ALTITUDE)
+  ,  _speed(GPS_INVALID_SPEED)
+  ,  _course(GPS_INVALID_ANGLE)
+  ,  _hdop(GPS_INVALID_HDOP)
+  ,  _numsats(GPS_INVALID_SATELLITES)
+  ,  _last_time_fix(GPS_INVALID_FIX_TIME)
+  ,  _last_position_fix(GPS_INVALID_FIX_TIME)
+  ,  _parity(0)
+  ,  _is_checksum_term(false)
+  ,  _sentence_type(_GPS_SENTENCE_OTHER)
+  ,  _term_number(0)
+  ,  _term_offset(0)
+  ,  _gps_data_good(false)
+#ifndef _GPS_NO_STATS
+  ,  _encoded_characters(0)
+  ,  _good_sentences(0)
+  ,  _failed_checksum(0)
+#endif
+{
+  _term[0] = '\0';
+} 
 
 void GPS::initSensor(){
-   _time=GPS_INVALID_TIME;
-    _date=GPS_INVALID_DATE;
-    _latitude=GPS_INVALID_ANGLE;
-    _longitude=GPS_INVALID_ANGLE;
-    _altitude=GPS_INVALID_ALTITUDE;
-    _speed=GPS_INVALID_SPEED;
-    _course=GPS_INVALID_ANGLE;
-    _hdop=GPS_INVALID_HDOP;
-    _numsats=GPS_INVALID_SATELLITES;
-    _last_time_fix=GPS_INVALID_FIX_TIME;
-    _last_position_fix=GPS_INVALID_FIX_TIME;
-    _parity=0;
-    _is_checksum_term=false;
-    _sentence_type=_GPS_SENTENCE_OTHER;
-    _term_number=0;
-    _term_offset=0;
-    _gps_data_good=false;
+   gpsSerial.begin( 9600 );
   #ifdef AIRBORNE_MODE
     initializeGPS();
   #endif
@@ -46,6 +55,7 @@ void GPS::updateData(){
     while (gpsSerial.available())
       encode(gpsSerial.read());
   } while (millis() - start < 0);
+  
   age = GPS_INVALID_AGE;
   f_get_position(&lat, &lon, &age);
   if (age == GPS_INVALID_AGE) {
@@ -79,15 +89,15 @@ void GPS::updateData(){
 }
 
 void GPS::f_get_position(float *latitude, float *longitude, unsigned long *fix_age){
-  long lat, lon;
-  get_position(&lat, &lon, fix_age);
-  *latitude = lat == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lat / 1000000.0);
-  *longitude = lat == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lon / 1000000.0);
+  long lati, longi;
+  get_position(&lati, &longi, fix_age);
+  lat = lati == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lat / 1000000.0);
+  lon = longi == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lon / 1000000.0);
 }
 void GPS::get_position(long *latitude, long *longitude, unsigned long *fix_age){
   if (latitude) *latitude = _latitude;
   if (longitude) *longitude = _longitude;
-  if (fix_age) *fix_age = _last_position_fix == GPS_INVALID_FIX_TIME ? 
+  if (fix_age) age = _last_position_fix == GPS_INVALID_FIX_TIME ? 
    GPS_INVALID_AGE : millis() - _last_position_fix;
 }
 float GPS::f_altitude(){

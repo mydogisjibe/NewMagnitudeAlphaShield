@@ -11,6 +11,7 @@
 class GPS: public Sensor
 {
 public:
+  GPS();
   float lat=0;
   float lon=0;
   float alt=0;
