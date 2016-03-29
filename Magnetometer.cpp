@@ -1,4 +1,4 @@
-// Code by Brent Luker (Unless otherwise stated)
+//Code by Brent Luker
 #include <Wire.h>
 #include "Magnetometer.h"
 
@@ -7,7 +7,7 @@
 #define HMC5883L_MODE_REG 0x02
 #define HMC5883L_FIRST_DATA_REG 0x03
 #define HMC5883L_CONT_MEASUREMENT_MODE 0x00
-//Check datasheet for other possible ranges
+//Check datasheet for other possible values
 #define HMC5883L_SCALE 0x01 // range: +-1.3 Gauss
 #define HMC5883L_GAUSS_PER_LSB 0.0092 // range: +-1.3 Gauss
 

@@ -1,4 +1,4 @@
-// Code by Brent Luker
+//Code by Brent Luker
 #include "Sensor.h"
 
 class Magnetometer: public Sensor
