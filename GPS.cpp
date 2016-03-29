@@ -50,6 +50,11 @@ void GPS::initSensor(){
 }
 
 void GPS::updateData(){
+    while (gpsSerial.available()) {
+    char c = gpsSerial.read();
+    encode( c );
+  }
+  
    unsigned long start = millis();
   do {
     while (gpsSerial.available())
@@ -91,8 +96,8 @@ void GPS::updateData(){
 void GPS::f_get_position(float *latitude, float *longitude, unsigned long *fix_age){
   long lati, longi;
   get_position(&lati, &longi, fix_age);
-  lat = lati == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lat / 1000000.0);
-  lon = longi == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lon / 1000000.0);
+  lat = lati == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (lati / 1000000.0);
+  lon = longi == GPS_INVALID_ANGLE ? GPS_INVALID_F_ANGLE : (longi / 1000000.0);
 }
 void GPS::get_position(long *latitude, long *longitude, unsigned long *fix_age){
   if (latitude) *latitude = _latitude;
