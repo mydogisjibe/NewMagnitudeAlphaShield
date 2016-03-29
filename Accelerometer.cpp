@@ -1,8 +1,7 @@
 //Code by Brent Luker
-#include <ADXL345.h>
+#include "ADXL345.h"
 #include "Accelerometer.h"
 
-// Check datasheet for other possible ranges
 #define ADXL345_RANGE 2
 #define ADXL345_G_PER_LSB 0.0039
 
