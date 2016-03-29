@@ -24,6 +24,7 @@ Barometer b;
 #define NUM_SENSORS 5
 
 //This array is used when all the sensors are more or less doing the same thing.
+Sensor* sensors[NUM_SENSORS] = {&a, &m,&g, &th,&b};
 void setup() {
   Serial.begin(9600);
   
