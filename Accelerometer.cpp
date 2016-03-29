@@ -1,3 +1,4 @@
+//Code by Brent Luker
 #include "ADXL345.h"
 #include "Accelerometer.h"
 

@@ -1,3 +1,4 @@
+//Code by Brent Luker
 #include <Wire.h>
 #include "Magnetometer.h"
 
