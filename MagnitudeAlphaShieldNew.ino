@@ -4,6 +4,7 @@
 #include "GPS.h"
 #include "Barometer.h"
 #include "TempHumid.h"
+#include "CO2.h"
 
 
 //Time in millis between each reading of the sensors, and
@@ -20,11 +21,12 @@ Magnetometer m;
 GPS g;
 TempHumid th;
 Barometer b;
+CO2 c;
 
-#define NUM_SENSORS 5
+#define NUM_SENSORS 6
 
 //This array is used when all the sensors are more or less doing the same thing.
-Sensor* sensors[NUM_SENSORS] = {&a, &m,&g, &th,&b};
+Sensor* sensors[NUM_SENSORS] = {&a, &m,&g, &th,&b, &c};
 void setup() {
   Serial.begin(9600);
   
@@ -48,6 +50,8 @@ void loop() {
 
   // Data logging
   if( lastLog < millis()){
+    Serial.print( F("CO2: "));
+    Serial.print(c.co2);
     Serial.print( F("th02Temp: "));
     Serial.print( th.temp );
     Serial.print( F(",humidity: "));
