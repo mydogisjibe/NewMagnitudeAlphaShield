@@ -1,11 +1,13 @@
 # Magnitude Alpha Shield Flight Repository
 
 ### This repository and code is created by:
+* [Matthew Gaim](https://github.com/matthewgaim)
 * [Jiahao Kuang](https://github.com/jiahaok)
 * [Brent Luker](https://github.com/mydogisjibe)
 * [Naomi Sagan](https://github.com/NSagan271)
 
 ### this respository is currently maintained by:
+* [Matthew Gaim](https://github.com/matthewgaim)
 * [Jiahao Kuang](https://github.com/jiahaok)
 * [Brent Luker](https://github.com/mydogisjibe)
 * [Naomi Sagan](https://github.com/NSagan271)
@@ -23,3 +25,9 @@
 
 ##### GPS Unit:
 * ADH-Tech GP-735T
+
+### License:
+
+#### This repository is under MIT License, for more info view [License](/License).
+
+### For more Info and Documentation View the Wiki.
