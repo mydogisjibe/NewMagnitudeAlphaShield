@@ -1,5 +1,5 @@
 #include "GPS.h"
-#include "SoftwareSerial.h"/
+#include "SoftwareSerial.h"
  #include <Arduino.h>
 
 #define GPS_RX_PIN 8
