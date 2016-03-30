@@ -9,8 +9,6 @@ public:
   float CO2;
 	void initSensor();
 	void updateData();
-private:
-	ADXL345 accelerometer;
 
 };
 
