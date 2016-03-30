@@ -1,8 +1,7 @@
-#include "ADXL345.h"
 #include "Sensor.h"
 
-#ifndef Accelerometer_h
-#define Accelerometer_h
+#ifndef CO2_h
+#define CO2_h
 
 class CO2: public Sensor
 {
