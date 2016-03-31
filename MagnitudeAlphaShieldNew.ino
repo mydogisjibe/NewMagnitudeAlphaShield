@@ -40,15 +40,13 @@ void setup() {
 //Creates 1 sec delay at begining
 unsigned long lastLog = INITIAL_DELAY;
 void loop() {
-  while(lastLog + READ_DELAY > millis());
-  lastLog = millis();
+  if( lastLog + READ_DELAY < millis()){
   
-  for(int8_t i=0; i<NUM_SENSORS; i++)
-    sensors[i]->updateData();
-
-  // Data logging
-  if( lastLog < millis()){
-    Serial.print( F("th02Temp: "));
+    for(int8_t i=0; i<NUM_SENSORS; i++)
+      sensors[i]->updateData();
+    
+    // Data logging
+    Serial.print( F("HIH-6130Temp: "));
     Serial.print( th.temp );
     Serial.print( F(",humidity: "));
     Serial.print( th.humidity );
