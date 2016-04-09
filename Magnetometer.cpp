@@ -55,3 +55,4 @@ void Magnetometer::updateData(){
   y = yRaw * HMC5883L_GAUSS_PER_LSB;
   z = zRaw * HMC5883L_GAUSS_PER_LSB;
 }
+

@@ -19,3 +19,4 @@ void Accelerometer::updateData(){
   y = ((float) ay) * ADXL345_G_PER_LSB;
   z = ((float) az) * ADXL345_G_PER_LSB;
 }
+

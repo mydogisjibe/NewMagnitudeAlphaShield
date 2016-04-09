@@ -54,3 +54,4 @@ void TempHumid::updateData(){
   humidity = (float) humData * 6.10e-3; // 100 / (2^14 - 1)
   temp = (float) tempData * 1.007e-2 - 40.0; // 165 / (2^14 - 1)
 }
+

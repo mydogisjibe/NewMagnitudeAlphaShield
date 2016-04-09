@@ -45,3 +45,4 @@ void Barometer::updateData(){
     }else Serial.println("failed to get temperture reading.");
   }else Serial.println("failed to start temperture reading.");
 }
+

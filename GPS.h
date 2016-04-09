@@ -1,7 +1,8 @@
 #define uint8_t byte
 #include "Sensor.h"
-#include "SoftwareSerial.h"
  #include <Arduino.h>
+#include "AltSoftSerial.h"
+
 
 #ifndef GPS_h
 #define GPS_h

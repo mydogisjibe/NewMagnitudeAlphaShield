@@ -10,3 +10,4 @@ public:
   void initSensor();
   void updateData();
 };
+

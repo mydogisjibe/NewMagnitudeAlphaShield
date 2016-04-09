@@ -1,5 +1,5 @@
 #include "GPS.h"
-#include "SoftwareSerial.h"/
+ #include "AltSoftSerial.h"
  #include <Arduino.h>
 
 #define GPS_RX_PIN 8
@@ -9,7 +9,7 @@
 #define _GPRMC_TERM   "GPRMC"
 #define _GPGGA_TERM   "GPGGA"
 
-SoftwareSerial gpsSerial( GPS_RX_PIN, GPS_TX_PIN );//GPS
+AltSoftSerial gpsSerial( GPS_RX_PIN, GPS_TX_PIN );//GPS
 
 const float GPS::GPS_INVALID_F_ANGLE = 1000.0;
 const float GPS::GPS_INVALID_F_ALTITUDE = 1000000.0;
@@ -43,20 +43,24 @@ void GPS::initSensor(){//initialize sensor
 }
 
 void GPS::updateData(){//get GPS data
-
+  gpsSerial.listen();
   //encode GPS data
   unsigned long start = millis();
   do {
-    while (gpsSerial.available())
-      encode(gpsSerial.read());
+    while (gpsSerial.available()){
+      char c =gpsSerial.read();
+      encode(c);
+    }
+      
   } while (millis() - start < 0);
   
   age = GPS_INVALID_AGE;//fix age
   
   f_get_position(&lat, &lon, &age);//position
   get_datetime(&date,&time,&age);//date+time
-  alt = f_altitude();//altitude
+  
   speed_mps = f_speed_mps();//speed
+  alt = f_altitude();//altitude
 
   //Invalid data
   if (age == GPS_INVALID_AGE) {//no/old GPS fix
@@ -323,3 +327,4 @@ long GPS::gpsatol(const char *str){
   while (gpsisdigit(*str))ret = 10 * ret + *str++ - '0';
   return ret;
 }
+
